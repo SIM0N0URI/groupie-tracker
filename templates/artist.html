@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Artist.Name}} - About</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/statics/styleArtist.css">
+</head>
+
+<body>
+    <header>
+        <h1>{{.Artist.Name}}</h1>
+    </header>
+
+    <main>
+        <section class="artist-info">
+            <img src="{{.Artist.Image}}" alt="Artist Image" class="artist-img">
+            <div class="artist-details">
+                <h2>Members</h2>
+                <ul>
+                    {{range .Artist.Members}}
+                    <li>{{.}}</li>
+                    {{end}}
+                </ul>
+
+                <p><strong>Creation Year:</strong> {{.Artist.CreationDate}}</p>
+                <p><strong>First Album:</strong> {{.Artist.FirstAlbum}}</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Locations</h2>
+            <ul>
+                {{range .Location.Locations}}
+                <li>{{.}}</li>
+                {{end}}
+            </ul>
+        </section>
+
+        <section>
+            <h2>Dates</h2>
+            <ul>
+                {{range .Dates.Dates}}
+                <li>{{.}}</li>
+                {{end}}
+            </ul>
+        </section>112762
+
+        <section>
+            <h2>Relations</h2>
+            {{range $loc, $dates := .Relation.DatesLocations}}
+            <p><strong>{{$loc}}:</strong></p>
+            <ul>
+                {{range $dates}}
+                <li>{{.}}</li>
+                {{end}}
+            </ul>
+            {{end}}
+        </section>
+    </main>
+
+    <footer>
+        <a href="http://localhost:8080/" class="back-btn">Back to Home</a>
+    </footer>
+
+</body>
+
+</html>

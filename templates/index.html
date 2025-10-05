@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groupie Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/statics/style.css">
+</head>
+
+<body>
+    <header>
+        <img src="https://i.imgur.com/9fKRbT0.png" alt="logo">
+        <h1>Groupie-Tracker</h1>
+    </header>
+
+    <div class="grid-container">
+        {{range . }}
+        <div class="card">
+            <a href="/artists/{{.ID}}">
+                <img src="{{.Image}}" alt="{{.Name}}">
+            </a>
+            <h2>{{.Name}}</h2>
+        </div>
+        {{end}}
+    </div>
+
+</body>
+
+</html>

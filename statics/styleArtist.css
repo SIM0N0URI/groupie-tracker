@@ -4,7 +4,7 @@ body {
     background-color: #0d0d0d;
     color: white;
     line-height: 1.6;
-    font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+    font-size: clamp(1rem, 1.7vw, 1.25rem);
 }
 
 header {
@@ -16,14 +16,14 @@ header {
 }
 
 header img {
-    width: clamp(2rem, 2vw + 1rem, 2.5rem);
-    height: clamp(2rem, 2vw + 1rem, 2.5rem);
+    width: clamp(2rem, 3.33vw, 2.5rem);
+    height: clamp(2rem, 3.33vw, 2.5rem);
 }
 
 header h1 {
     text-align: center;
     font-family: "DM Serif Display", serif;
-    font-size: clamp(1.5rem, 1vw + 1.2rem, 1.75rem);
+    font-size: clamp(1.5rem, 2.6vw, 1.75rem);
     margin: auto;
 }
 
@@ -60,7 +60,7 @@ section {
 
 section h2 {
     font-family: "DM Serif Display", serif;
-    font-size: clamp(1.25rem, 1vw + 1rem, 1.5625rem);
+    font-size: clamp(1.25rem, 2.5vw, 1.5625rem);
     margin-bottom: clamp(0.5rem, 1vw, 0.75rem);
     border-bottom: 1px solid #e64311;
     padding-bottom: clamp(0.25rem, 0.5vw, 0.3125rem);

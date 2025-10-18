@@ -6,6 +6,8 @@ import (
 	"os"
 )
 
+// Style serves static files such as CSS or assets requested by the client.
+// It checks file validity and permissions before safely sending the file to the response.
 func Style(w http.ResponseWriter, r *http.Request) {
 	fileinfo, err := os.Stat(r.URL.Path[1:])
 	if err != nil {

@@ -44,6 +44,8 @@ type ErrorPage struct {
 	Message string
 }
 
+// FetchJson sends an HTTP GET request to the given URL and decodes the JSON response.
+// It returns an error if the request or decoding process fails.
 func FetchJson(url string, target any) error {
 	resp, err := http.Get(url)
 	if err != nil {
@@ -60,6 +62,8 @@ func FetchJson(url string, target any) error {
 	return nil
 }
 
+// GetDetails retrieves all related information for a specific artist.
+// It fetches artist data, locations, concert dates, and relations, then combines them.
 func GetDetails(url string) (All, error) {
 	var artist Artist
 	err := FetchJson(url, &artist)

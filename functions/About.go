@@ -9,22 +9,24 @@ import (
 	"strings"
 )
 
+// About handles the display of a detailed artist page based on the artist ID.
+// It validates the URL, fetches the artist s full data, and renders the corresponding HTML template.
 func About(w http.ResponseWriter, r *http.Request) {
 	ID := strings.TrimPrefix(r.URL.Path, "/artists/")
 
 	if ID == "" {
-		RenderError(w,"Page not found",http.StatusNotFound)
+		RenderError(w, "Page not found", http.StatusNotFound)
 		return
 	}
 
 	id, err := strconv.Atoi(ID)
 	if err != nil || id < 1 || id > 52 {
-		RenderError(w,"Page not found",http.StatusNotFound)
+		RenderError(w, "Page not found", http.StatusNotFound)
 		return
 	}
 
 	if r.Method != http.MethodGet {
-		RenderError(w,"Method not allowed",http.StatusMethodNotAllowed)
+		RenderError(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
 
@@ -44,15 +46,15 @@ func About(w http.ResponseWriter, r *http.Request) {
 
 	var buf bytes.Buffer
 
-	err3 := tmpl.Execute(&buf, &all)
-	if err3 != nil {
+	err = tmpl.Execute(&buf, &all)
+	if err != nil {
 		RenderError(w, "Please try later", http.StatusInternalServerError)
-		fmt.Println("Failed to execute artist template", err3)
+		fmt.Println("Failed to execute artist template", err)
 		return
 	}
 
-	_, err4 := buf.WriteTo(w)
-	if err4 != nil {
+	_, err = buf.WriteTo(w)
+	if err != nil {
 		RenderError(w, "Please try later", http.StatusInternalServerError)
 		fmt.Println("Failed to write in the buffer")
 		return

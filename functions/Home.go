@@ -2,11 +2,17 @@ package functions
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"html/template"
 	"net/http"
+	"syscall"
 )
 
+var Artists []Artist
+
+// Home handles the main page request and displays the list of all artists.
+// It validates the request, fetches artist data from the API, and renders the index template.
 func Home(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 		RenderError(w, "Page not found", http.StatusNotFound)
@@ -25,27 +31,26 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var artists []Artist
 	var buf bytes.Buffer
 
-	err2 := FetchJson(url, &artists)
-	if err2 != nil {
+	err = FetchJson(url, &Artists)
+	if err != nil {
 		RenderError(w, "Please try later", http.StatusInternalServerError)
-		fmt.Println(err2)
+		fmt.Println(err)
 		return
 	}
 
-	err3 := tmpl.Execute(&buf, &artists)
-	if err3 != nil {
+	err = tmpl.Execute(&buf, &Artists)
+	if err != nil {
 		RenderError(w, "Please try later", http.StatusInternalServerError)
-		fmt.Println("Failed to execute index template", err3)
+		fmt.Println("Failed to execute index template", err)
 		return
 	}
 
-	_, err4 := buf.WriteTo(w)
-	if err4 != nil {
-		RenderError(w, "Please try later", http.StatusInternalServerError)
-		fmt.Println("Failed to write in the buffer")
+	if _, err := buf.WriteTo(w); err != nil {
+		if !errors.Is(err, syscall.EPIPE) {
+			fmt.Println("Failed to write buffer:", err)
+		}
 		return
 	}
 }

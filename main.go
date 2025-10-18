@@ -7,11 +7,11 @@ import (
 	"groupi-tracker/functions"
 )
 
+// Sets up HTTP routes and starts the server on localhost:8080
 func main() {
 	http.HandleFunc("/", functions.Home)
 	http.HandleFunc("/artists/", functions.About)
 	http.HandleFunc("/statics/", functions.Style)
-
 	fmt.Println("server started on: http://localhost:8080")
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
